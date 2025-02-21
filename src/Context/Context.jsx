@@ -31,7 +31,7 @@ const Context = ({ children }) => {
         };
 
         return axios
-          .post("http://localhost:3000/users", userData)
+          .post("https://taskflow-server-ra21.onrender.com/users", userData)
           .then((res) => console.log("Server Response:", res))
           .catch((error) => console.error("Axios Error:", error));
       })
@@ -76,7 +76,7 @@ const Context = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         axios
-          .post("http://localhost:3000/jwt", {
+          .post("https://taskflow-server-ra21.onrender.com/jwt", {
             email: currentUser.email,
           })
           .then((data) => {

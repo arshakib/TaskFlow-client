@@ -98,7 +98,7 @@ const Screen = () => {
   // Initialize socket connection once the user is authenticated.
   useEffect(() => {
     if (user) {
-      socketRef.current = io("http://localhost:3000", {
+      socketRef.current = io("https://taskflow-server-ra21.onrender.com/", {
         auth: { email: user.email },
       });
       socketRef.current.on("tasksUpdated", (data) => {
@@ -391,22 +391,36 @@ const Screen = () => {
           <div className="bg-white p-6 rounded-lg shadow-md w-96">
             <h2 className="text-xl font-bold mb-4">Add New Task</h2>
             <div className="mb-4">
-              <label className="block text-gray-700">Title</label>
+              <label className="block text-gray-700">
+                Title (required, max 50 characters)
+              </label>
               <input
                 type="text"
                 className="w-full p-2 border border-gray-300 rounded"
                 value={newTaskTitle}
                 onChange={(e) => setNewTaskTitle(e.target.value)}
+                maxLength={50} // Limit title length
               />
+              <p className="text-sm text-gray-500">
+                {50 - newTaskTitle.length} characters left
+              </p>
             </div>
+
             <div className="mb-4">
-              <label className="block text-gray-700">Description</label>
+              <label className="block text-gray-700">
+                Description (optional, max 200 characters)
+              </label>
               <textarea
                 className="w-full p-2 border border-gray-300 rounded"
                 value={newTaskDescription}
                 onChange={(e) => setNewTaskDescription(e.target.value)}
+                maxLength={200} // Limit description length
               ></textarea>
+              <p className="text-sm text-gray-500">
+                {200 - newTaskDescription.length} characters left
+              </p>
             </div>
+
             <div className="mb-4">
               <label className="block text-gray-700">Category</label>
               <select

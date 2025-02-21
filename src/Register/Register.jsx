@@ -67,9 +67,11 @@ const Register = () => {
       .then((result) => {
         navigate("/");
         try {
-          axios.post("http://localhost:3000/users", user).then((response) => {
-            console.log(response);
-          });
+          axios
+            .post("https://taskflow-server-ra21.onrender.com/users", user)
+            .then((response) => {
+              console.log(response);
+            });
         } catch (error) {
           console.log(error);
         }
